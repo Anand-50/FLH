@@ -1,0 +1,242 @@
+.permissions-container {
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+/* Header */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.page-title {
+  color: #a52a2a;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.btn-create-permission {
+  background-color: #ae1905;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-create-permission:hover {
+  background-color: #a52a2a;
+}
+
+/* Form */
+.form-modal {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+}
+.responsive-form label {
+  font-weight: 600;
+  margin-top: 10px;
+}
+.popup-form select,
+.popup-form input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  gap: 10px;
+}
+.btn-save {
+  background: #a52a2a;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+}
+.btn-cancel {
+  background: #f5901d;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+}
+.btn-save:hover { opacity: 0.9; }
+.btn-cancel:hover { opacity: 0.9; }
+
+/* Table */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.admin-table th {
+  background: #a52a2a;
+  color: white;
+  padding: 10px;
+}
+.admin-table td {
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+}
+.perm-badge {
+  background: #f5901d;
+  color: white;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin: 2px;
+  font-size: 12px;
+}
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: #a52a2a;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
+
+
+/* ===== Responsive Form Layout ===== */
+.form-modal {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 700px;
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-header h3 {
+  color: #a52a2a;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.close-btn {
+  background: #f5901d;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.popup-form label {
+  font-weight: 600;
+  color: #333;
+}
+
+.popup-form select,
+.popup-form input[type="text"],
+.popup-form input[type="email"],
+.popup-form input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+.popup-form select:focus,
+.popup-form input:focus {
+  border-color: #f5901d;
+}
+
+/* Permission checkboxes grid */
+.permissions-list.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.permission-item {
+  background: #fdf3ec;
+  border: 1px solid #f5901d;
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #a52a2a;
+  transition: 0.3s;
+}
+
+.permission-item:hover {
+  background: #fff7f3;
+  border-color: #a52a2a;
+}
+
+/* Buttons */
+.btn-save {
+  background: #a52a2a;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+.btn-save:hover {
+  opacity: 0.9;
+}
+
+.btn-cancel {
+  background: #f5901d;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+.btn-cancel:hover {
+  opacity: 0.9;
+}
+
+/* Form actions responsive */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .form-modal {
+    padding: 15px;
+  }
+  .permissions-list.grid-layout {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,92 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaEye, FaSearch } from "react-icons/fa";
+
+const Orders = () => {
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const orders = [
+    { id: 9, orderNo: "ORD-6-000009", customerName: "Mathu Mathu", phone: "9988776653", address: "Hyderabad, Telangana", amount: "₹1599.00", status: "Order Placed", date: "10/29/2025" },
+    { id: 8, orderNo: "ORD-6-000008", customerName: "Suresh Kumar", phone: "9876543210", address: "Chennai, Tamil Nadu", amount: "₹1299.00", status: "Dispatched", date: "10/29/2025" },
+    { id: 7, orderNo: "ORD-6-000007", customerName: "Ravi Teja", phone: "8899776655", address: "Hyderabad, Telangana", amount: "₹999.00", status: "Cancelled", date: "10/29/2025" },
+    { id: 6, orderNo: "ORD-3-000006", customerName: "Ramanarao Konidela", phone: "9977553311", address: "Vijayawada, Andhra Pradesh", amount: "₹1599.00", status: "Delivered", date: "10/28/2025" },
+    { id: 5, orderNo: "ORD-3-000005", customerName: "Mahesh Babu", phone: "9966332211", address: "Guntur, Andhra Pradesh", amount: "₹1999.00", status: "Rejected", date: "10/28/2025" },
+  ];
+
+  const filteredOrders = orders.filter(
+    (order) =>
+      order.orderNo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      order.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      order.phone.includes(searchTerm)
+  );
+
+  const getStatusClass = (status) => {
+    switch (status) {
+      case "Delivered": return "badge bg-success";
+      case "Dispatched": return "badge bg-info text-dark";
+      case "Order Placed": return "badge bg-secondary";
+      case "Rejected": return "badge bg-dark";
+      case "Cancelled": return "badge bg-danger";
+      default: return "badge bg-warning text-dark";
+    }
+  };
+
+  return (
+    <div className="container-fluid mt-3">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="fw-bold mb-0" style={{ color: "#a61625", letterSpacing: "0.5px" }}>📦 Orders</h1>
+
+        <div className="d-flex align-items-center" style={{ backgroundColor: "white", border: "2px solid transparent", borderRadius: "50px", boxShadow: "0 2px 6px rgba(0,0,0,0.1)", padding: "6px 12px", width: "250px", transition: "all 0.3s ease" }}>
+          <FaSearch className="text-muted me-2" style={{ color: "#888", fontSize: "16px" }} />
+          <input type="text" placeholder="Search orders..." className="form-control border-0 bg-transparent" style={{ fontSize: "14px", width: "100%", outline: "none", boxShadow: "none", color: "#333" }} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+        </div>
+      </div>
+
+      <div className="table-responsive shadow-sm bg-white p-3 rounded">
+        <table className="table table-bordered align-middle" style={{ borderRadius: "8px", overflow: "hidden" }}>
+          <thead>
+            <tr style={{ backgroundColor: "#a61625", color: "white", fontWeight: "700", fontSize: "15px", textAlign: "center" }}>
+              <th style={{ backgroundColor: "#a61625", color: "white", fontWeight: "700", fontSize: "15px", textAlign: "center" }}>Order ID</th>
+              <th style={{ backgroundColor: "#a61625", color: "white", fontWeight: "700", fontSize: "15px", textAlign: "center" }}>Order No</th>
+              <th style={{ backgroundColor: "#a61625", color: "white", fontWeight: "700", fontSize: "15px", textAlign: "center" }}>Customer Name</th>
+              <th style={{ backgroundColor: "#a61625", color: "white", fontWeight: "700", fontSize: "15px", textAlign: "center" }}>Phone</th>
+              <th style={{ backgroundColor: "#a61625", color: "white", fontWeight: "700", fontSize: "15px", textAlign: "center" }}>Address</th>
+              <th style={{ backgroundColor: "#a61625", color: "white", fontWeight: "700", fontSize: "15px", textAlign: "center" }}>Total Amount</th>
+              <th style={{ backgroundColor: "#a61625", color: "white", fontWeight: "700", fontSize: "15px", textAlign: "center" }}>Status</th>
+              <th style={{ backgroundColor: "#a61625", color: "white", fontWeight: "700", fontSize: "15px", textAlign: "center" }}>Order Date</th>
+              <th style={{ backgroundColor: "#a61625", color: "white", fontWeight: "700", fontSize: "15px", textAlign: "center" }}>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredOrders.length > 0 ? (
+              filteredOrders.map((order) => (
+                <tr key={order.id}>
+                  <td>{order.id}</td>
+                  <td className="fw-semibold">{order.orderNo}</td>
+                  <td>{order.customerName}</td>
+                  <td>{order.phone}</td>
+                  <td>{order.address}</td>
+                  <td className="text-success fw-semibold">{order.amount}</td>
+                  <td><span className={getStatusClass(order.status)}>{order.status}</span></td>
+                  <td>{order.date}</td>
+                  <td>
+                    <button className="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center" style={{ width: "32px", height: "32px" }} onClick={() => navigate(`/order-details/${order.id}`, { state: { order } })} title="View Order Details">
+                      <FaEye size={14} />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="9" className="text-center text-muted py-3">No orders found.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default Orders;

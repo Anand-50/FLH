@@ -1,0 +1,114 @@
+  :root {
+    --primary: #bf1f2f;
+    --primary-dark: #991925;
+    --secondary: #f5901d;
+    --secondary-dark: #e07e1a;
+    --light: #ffffff;
+  }
+
+  /* Sidebar container */
+  .sidebar {
+    width: 260px;
+    height: 100vh;
+    background-color: var(--secondary);
+    color: var(--light);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    font-family: "Poppins", sans-serif;
+    padding-top: 20px;
+  }
+
+  /* Scrollbar styling */
+  .sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 4px;
+  }
+
+  /* List items */
+  .sidebar .nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 14px 22px;
+    margin: 4px 12px;
+    border-radius: 8px;
+    color: #991925;
+    font-size: 18px; /* Slightly bigger text */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+  }
+
+  /* Hover effect */
+  .sidebar .nav-item:hover {
+    background-color: var(--primary);
+    color: #fff;
+    transform: translateX(2px);
+  }
+
+  /* Active menu */
+  .active-menu {
+    background-color: var(--primary-dark);
+    color: #fff !important;
+    font-weight: 600;
+    box-shadow: inset 2px 0 0 var(--light);
+  }
+
+  /* Sidebar icon styling */
+  .sidebar-icon {
+    font-size: 18px;
+    color: #fff;
+    margin-right: 12px;
+  }
+
+  /* Sidebar text */
+  .sidebar-text {
+    font-size: 16px;
+    color: #fff;
+  }
+
+  /* Submenu */
+  .submenu {
+    background-color: rgba(0, 0, 0, 0.08);
+    margin: 0 20px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+
+  .submenu-item {
+    padding: 10px 22px;
+    color: #fff;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .submenu-item:hover {
+    background-color: var(--primary);
+    margin-left: 6px;
+    color: #fff;
+  }
+
+  /* Dropdown icon animation */
+  .dropdown-icon {
+    transition: transform 0.3s ease;
+  }
+  .dropdown-icon.rotate {
+    transform: rotate(180deg);
+  }
+
+  /* Navbar fix for spacing */
+  .navbar {
+    height: 85px !important;
+  }
+
+
+
