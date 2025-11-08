@@ -405,6 +405,7 @@ import Subscriptions from "./components/Subscriptions";
 import Customers from "./components/Customers";
 import Agents from "./components/Agents";
 import Vendors from "./components/Vendors";
+import AMC_MPL from "./components/AMC_MPL";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -525,6 +526,8 @@ function App() {
             <Route path="/product-categories" element={<ProductCategories />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/order-details/:id" element={<OrderDetails />} />
+            <Route path="/amc-mpl" element={<AMC_MPL />} />
+
 
             {/* 404 fallback */}
             <Route

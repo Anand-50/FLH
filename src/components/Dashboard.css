@@ -14,6 +14,7 @@
   justify-content: center;
   align-items: center;
 }
+
 /* ===== ICON CENTERING ===== */
 .stat-card svg,
 .summary-card svg {
@@ -54,6 +55,7 @@
   text-align: center;
   width: 100%;
 }
+
 /* ========= DASHBOARD BASE ========= */
 .dashboard-wrapper {
   padding: 20px;
@@ -129,6 +131,33 @@ h4.fw-bold.text-secondary {
   color: #991925 !important;
   font-weight: 600;
 }
+
+/* ========= ICON LABEL (TEXT BELOW ICON) COLOR FIX ========= */
+/* ========= ICON LABEL (TEXT BELOW ICON) — ENHANCED STYLE ========= */
+.stat-card h6,
+.summary-card h6,
+.chart-card h6,
+.stat-card p,
+.summary-card p {
+  color: #222 !important;             /* deep charcoal instead of plain black */
+  font-weight: 600;                   /* slightly bolder for clarity */
+  text-align: center;
+  letter-spacing: 0.5px;              /* elegant spacing */
+  font-family: "Poppins", sans-serif; /* clean modern font */
+  font-size: 1rem;                    /* balanced size */
+  margin-top: 8px;                    /* breathing space below icon */
+  transition: color 0.3s ease;        /* smooth hover effect */
+}
+
+/* Subtle hover effect for interactive feel */
+.stat-card:hover h6,
+.summary-card:hover h6,
+.chart-card:hover h6,
+.stat-card:hover p,
+.summary-card:hover p {
+  color: #991925 !important;          /* your brand color (maroon) on hover */
+}
+
 
 /* ========= RESPONSIVENESS ========= */
 

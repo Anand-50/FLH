@@ -1115,11 +1115,7 @@ export default function AgentPage() {
   return (
     <div className="container mt-4">
       {/* Header */}
-      <div className="d-flex align-items-center mb-3">
-        <button className="btn btn-outline-secondary me-2" onClick={handleBackToList}>
-          ← Back
-        </button>
-      </div>
+     
 
       {/* Title + Search Bar in One Line - Matching Customer Page */}
       <div className="d-flex align-items-center justify-content-between mb-4">

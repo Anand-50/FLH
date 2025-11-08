@@ -12,8 +12,8 @@
 .login-card {
   background: #fff;
   padding: 80px 60px;
-  width: 520px;
-  min-height: 650px;
+  width: 470px;
+  min-height: 600px;
   border-radius: 35px;
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
 }
@@ -47,13 +47,18 @@
 
 /* Input Fields */
 .login-input {
-  border-radius: 15px;
-  padding: 16px 48px 16px 18px;
-  border: 2px solid #f5c3b6;
-  outline: none;
-  transition: all 0.3s ease;
-  font-size: 16px;
+  width: 100% !important;
+  height: 56px !important; /* 👈 same visual height as login button */
+  border-radius: 15px !important;
+  padding: 0 18px !important;
+  border: 2px solid #f5c3b6 !important;
+  outline: none !important;
+  transition: all 0.3s ease !important;
+  font-size: 17px !important;
+  box-sizing: border-box !important;
+  display: block !important;
 }
+
 
 .login-input:focus {
   border-color: #bf1f2f;

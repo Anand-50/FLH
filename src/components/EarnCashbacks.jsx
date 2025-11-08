@@ -1,3 +1,4 @@
+// EarnCashbacks.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cashback from "./Cashback";
@@ -109,6 +110,18 @@ function EarnCashbacks({ onTabChange }) {
     { id: 6, position: 5, value: "1000", winnerId: "N/A", phone: "N/A", name: "N/A", ticket: "N/A", status: "Pending" },
   ]);
 
+  // New state for editing & deleting prizes
+  const [showEditPrize, setShowEditPrize] = useState(false);
+  const [editPrizeData, setEditPrizeData] = useState({
+    id: "",
+    position: "",
+    value: ""
+  });
+  const [editPrizeErrors, setEditPrizeErrors] = useState({ position: "", value: "" });
+
+  const [showDeletePrize, setShowDeletePrize] = useState(false);
+  const [prizeToDelete, setPrizeToDelete] = useState(null);
+
   // Handle navigation to Categories
   const handleCategoriesClick = () => {
     navigate("/categories");
@@ -203,7 +216,7 @@ function EarnCashbacks({ onTabChange }) {
     const errors = {};
     let isValid = true;
 
-    if (!prizeData.position.trim()) {
+    if (!prizeData.position.toString().trim()) {
       errors.position = "Winning position is required";
       isValid = false;
     } else if (isNaN(prizeData.position) || parseInt(prizeData.position) <= 0) {
@@ -211,7 +224,7 @@ function EarnCashbacks({ onTabChange }) {
       isValid = false;
     }
 
-    if (!prizeData.value.trim()) {
+    if (!prizeData.value.toString().trim()) {
       errors.value = "Prize value is required";
       isValid = false;
     } else if (isNaN(prizeData.value) || parseInt(prizeData.value) <= 0) {
@@ -220,6 +233,31 @@ function EarnCashbacks({ onTabChange }) {
     }
 
     setPrizeErrors(errors);
+    return isValid;
+  };
+
+  // Validation for editing prize (separate so we don't mix states)
+  const validateEditPrizeForm = () => {
+    const errors = {};
+    let isValid = true;
+
+    if (!editPrizeData.position.toString().trim()) {
+      errors.position = "Winning position is required";
+      isValid = false;
+    } else if (isNaN(editPrizeData.position) || parseInt(editPrizeData.position) <= 0) {
+      errors.position = "Please enter a valid position number";
+      isValid = false;
+    }
+
+    if (!editPrizeData.value.toString().trim()) {
+      errors.value = "Prize value is required";
+      isValid = false;
+    } else if (isNaN(editPrizeData.value) || parseInt(editPrizeData.value) <= 0) {
+      errors.value = "Please enter a valid prize value";
+      isValid = false;
+    }
+
+    setEditPrizeErrors(errors);
     return isValid;
   };
 
@@ -596,6 +634,67 @@ function EarnCashbacks({ onTabChange }) {
     handleCloseAddPrize();
   };
 
+  // Prize edit handlers (new)
+  const handleEditPrizeClick = (p) => {
+    setEditPrizeErrors({ position: "", value: "" });
+    setEditPrizeData({
+      id: p.id,
+      position: p.position.toString(),
+      value: p.value.toString()
+    });
+    setShowEditPrize(true);
+  };
+
+  const handleCloseEditPrize = () => {
+    setShowEditPrize(false);
+    setEditPrizeData({ id: "", position: "", value: "" });
+    setEditPrizeErrors({ position: "", value: "" });
+  };
+
+  const handleEditPrizeChange = (e) => {
+    const { name, value } = e.target;
+    setEditPrizeData({ ...editPrizeData, [name]: value });
+    if (editPrizeErrors[name]) {
+      setEditPrizeErrors({ ...editPrizeErrors, [name]: "" });
+    }
+  };
+
+  const handleUpdatePrize = () => {
+    if (!validateEditPrizeForm()) {
+      showToast("Please fill all required fields for prize correctly!", "error");
+      return;
+    }
+
+    const updatedPrize = {
+      id: editPrizeData.id,
+      position: parseInt(editPrizeData.position),
+      value: editPrizeData.value.toString()
+    };
+
+    setPrizes(prev => prev.map(pr => pr.id === updatedPrize.id ? { ...pr, position: updatedPrize.position, value: updatedPrize.value } : pr));
+    showToast(`Prize updated: Position ${updatedPrize.position}, Value ${updatedPrize.value}`, "success");
+    handleCloseEditPrize();
+  };
+
+  // Prize delete handlers (new)
+  const handleDeletePrizeClick = (p) => {
+    setPrizeToDelete(p);
+    setShowDeletePrize(true);
+  };
+
+  const handleConfirmDeletePrize = () => {
+    if (!prizeToDelete) return;
+    setPrizes(prev => prev.filter(pr => pr.id !== prizeToDelete.id));
+    showToast(`Prize deleted (ID ${prizeToDelete.id})`, "success");
+    setPrizeToDelete(null);
+    setShowDeletePrize(false);
+  };
+
+  const handleCancelDeletePrize = () => {
+    setPrizeToDelete(null);
+    setShowDeletePrize(false);
+  };
+
   const handleSearch = (e) => {
     if (e.key === 'Enter' || e.type === 'click') {
       // Search is already handled by the filteredCashbacks, this is just for the button click
@@ -641,6 +740,7 @@ function EarnCashbacks({ onTabChange }) {
                 <th style={thStyle}>Winner Name</th>
                 <th style={thStyle}>Winner Ticket</th>
                 <th style={thStyle}>Status</th>
+                <th style={thStyle}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -666,6 +766,41 @@ function EarnCashbacks({ onTabChange }) {
                     >
                       {p.status}
                     </span>
+                  </td>
+                  <td style={tdStyle}>
+                    {/* View winners already exists at the cashback list; here for prize actions */}
+                    <button
+                      title="Edit Prize"
+                      onClick={() => handleEditPrizeClick(p)}
+                      style={{
+                        marginRight: "8px",
+                        padding: "6px 8px",
+                        borderRadius: "6px",
+                        cursor: "pointer",
+                        border: "none",
+                        background: "#007BFF",
+                        color: "#fff",
+                        fontWeight: 600
+                      }}
+                    >
+                      ✏️
+                    </button>
+
+                    <button
+                      title="Delete Prize"
+                      onClick={() => handleDeletePrizeClick(p)}
+                      style={{
+                        padding: "6px 8px",
+                        borderRadius: "6px",
+                        cursor: "pointer",
+                        border: "none",
+                        background: "#B11226",
+                        color: "#fff",
+                        fontWeight: 600
+                      }}
+                    >
+                      🗑️
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -833,6 +968,196 @@ function EarnCashbacks({ onTabChange }) {
                   }}
                 >
                   Add Prize
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Edit Prize Modal */}
+        {showEditPrize && (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: "rgba(0,0,0,0.5)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 1000,
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "white",
+                borderRadius: "12px",
+                width: "90%",
+                maxWidth: "500px",
+                padding: "25px",
+                position: "relative",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
+              }}
+            >
+              <button
+                onClick={handleCloseEditPrize}
+                style={{
+                  position: "absolute",
+                  top: "12px",
+                  right: "16px",
+                  background: "none",
+                  border: "none",
+                  fontSize: "22px",
+                  cursor: "pointer"
+                }}
+              >
+                ×
+              </button>
+
+              <h2 style={{
+                fontSize: "20px",
+                color: "#000",
+                marginBottom: "20px",
+                fontWeight: "700",
+                textAlign: "center"
+              }}>
+                Edit Prize
+              </h2>
+
+              <div style={{ marginBottom: "18px" }}>
+                <div style={{
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  marginBottom: "8px",
+                  color: "#333"
+                }}>
+                  Ear Cashback Name
+                </div>
+                <div style={{
+                  padding: "12px",
+                  borderRadius: "6px",
+                  border: "1px solid #ddd",
+                  background: "#f9f9f9",
+                  fontSize: "14px"
+                }}>
+                  {selectedCashback.title} (ID: {selectedCashback.id})
+                </div>
+              </div>
+
+              <div style={{ marginBottom: "18px" }}>
+                <label>Winning Position</label>
+                <input
+                  type="number"
+                  name="position"
+                  value={editPrizeData.position}
+                  onChange={handleEditPrizeChange}
+                  style={getInputStyle(!!editPrizeErrors.position)}
+                />
+                {editPrizeErrors.position && <span style={errorStyle}>{editPrizeErrors.position}</span>}
+              </div>
+
+              <div style={{ marginBottom: "18px" }}>
+                <label>Prize Value</label>
+                <input
+                  type="number"
+                  name="value"
+                  value={editPrizeData.value}
+                  onChange={handleEditPrizeChange}
+                  style={getInputStyle(!!editPrizeErrors.value)}
+                />
+                {editPrizeErrors.value && <span style={errorStyle}>{editPrizeErrors.value}</span>}
+              </div>
+
+              <div style={{ display: "flex", gap: "12px", marginTop: "18px" }}>
+                <button
+                  onClick={handleCloseEditPrize}
+                  style={{
+                    flex: 1,
+                    background: "#fff",
+                    color: "#333",
+                    border: "1px solid #ccc",
+                    padding: "12px",
+                    borderRadius: "6px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleUpdatePrize}
+                  style={{
+                    flex: 1,
+                    background: "#B11226",
+                    color: "#fff",
+                    border: "none",
+                    padding: "12px",
+                    borderRadius: "6px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                  }}
+                >
+                  Update Prize
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Delete Prize Confirmation Modal */}
+        {showDeletePrize && (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: "rgba(0,0,0,0.6)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 1000,
+            }}
+          >
+            <div
+              style={{
+                background: "white",
+                borderRadius: "12px",
+                padding: "25px",
+                width: "420px",
+                textAlign: "center",
+              }}
+            >
+              <h3 style={{ color: "#bf1f2f" }}>Delete Prize</h3>
+              <p>Are you sure you want to delete prize "{prizeToDelete?.position} - {prizeToDelete?.value}"?</p>
+              <div style={{ marginTop: "20px", display: "flex", justifyContent: "center", gap: "15px" }}>
+                <button
+                  onClick={handleCancelDeletePrize}
+                  style={{
+                    background: "#ccc",
+                    border: "none",
+                    padding: "10px 15px",
+                    borderRadius: "6px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleConfirmDeletePrize}
+                  style={{
+                    background: "#bf1f2f",
+                    color: "white",
+                    border: "none",
+                    padding: "10px 15px",
+                    borderRadius: "6px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Delete
                 </button>
               </div>
             </div>

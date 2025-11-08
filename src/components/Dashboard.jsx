@@ -1002,22 +1002,22 @@ const Dashboard = () => {
         <Col md={4}>
           <Card className="summary-card p-4 shadow-sm border-success">
             <FaTrophy size={48} color="#f39c12" className="mb-3" />
-            <h6 className="text-secondary">Gold Winners</h6>
-            <h3 className="fw-bold text-success">320</h3>
+            <h6 className="text-secondary">ECB Winners</h6>
+            <h3 className="fw-bold text-success">220</h3>
           </Card>
         </Col>
         <Col md={4}>
           <Card className="summary-card p-4 shadow-sm border-info">
             <FaTrophy size={48} color="#36b9cc" className="mb-3" />
-            <h6 className="text-secondary">Silver Winners</h6>
-            <h3 className="fw-bold text-info">210</h3>
+            <h6 className="text-secondary">Luckey Draw Winners</h6>
+            <h3 className="fw-bold text-info">180</h3>
           </Card>
         </Col>
         <Col md={4}>
           <Card className="summary-card p-4 shadow-sm border-warning">
             <FaTrophy size={48} color="#f6c23e" className="mb-3" />
-            <h6 className="text-secondary">Bronze Winners</h6>
-            <h3 className="fw-bold text-warning">150</h3>
+            <h6 className="text-secondary">Total Winners</h6>
+            <h3 className="fw-bold text-warning">400</h3>
           </Card>
         </Col>
       </Row>
