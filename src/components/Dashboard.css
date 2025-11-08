@@ -134,28 +134,47 @@ h4.fw-bold.text-secondary {
 
 /* ========= ICON LABEL (TEXT BELOW ICON) COLOR FIX ========= */
 /* ========= ICON LABEL (TEXT BELOW ICON) — ENHANCED STYLE ========= */
+/* ========= ICON LABELS & NUMBERS BELOW ICONS — FINAL FIX ========= */
+
+/* Headings / Labels below icons */
 .stat-card h6,
 .summary-card h6,
-.chart-card h6,
-.stat-card p,
-.summary-card p {
-  color: #222 !important;             /* deep charcoal instead of plain black */
-  font-weight: 600;                   /* slightly bolder for clarity */
-  text-align: center;
-  letter-spacing: 0.5px;              /* elegant spacing */
-  font-family: "Poppins", sans-serif; /* clean modern font */
-  font-size: 1rem;                    /* balanced size */
-  margin-top: 8px;                    /* breathing space below icon */
-  transition: color 0.3s ease;        /* smooth hover effect */
+.chart-card h6 {
+  color: #000 !important;             /* ✅ Strong black */
+  font-weight: 700 !important;
+  text-align: center !important;
+  letter-spacing: 0.5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem !important;
+  margin-top: 8px !important;
+  transition: color 0.3s ease;
 }
 
-/* Subtle hover effect for interactive feel */
+/* Numbers or main values under icons */
+.stat-card h3,
+.summary-card h3,
+.chart-card h3,
+.stat-card p,
+.summary-card p {
+  color: #000 !important;             /* ✅ Pure black for numbers */
+  font-weight: 800 !important;        /* ✅ Bold for visibility */
+  text-align: center !important;
+  font-size: 1.2rem !important;       /* ✅ Slightly larger */
+  margin-top: 4px !important;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+/* On hover – Maroon accent */
+.stat-card:hover h3,
+.summary-card:hover h3,
+.chart-card:hover h3,
 .stat-card:hover h6,
 .summary-card:hover h6,
 .chart-card:hover h6,
 .stat-card:hover p,
 .summary-card:hover p {
-  color: #991925 !important;          /* your brand color (maroon) on hover */
+  color: #991925 !important;          /* ✅ Maroon hover color */
 }
 
 
