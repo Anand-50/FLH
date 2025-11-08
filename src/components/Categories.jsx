@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-
-function Categories({ onTabChange }) {
+import { useNavigate } from "react-router-dom"; // ✅ Import navigation hook
+ 
+function Categories() {
+  const navigate = useNavigate(); // ✅ Initialize navigation
+ 
   const [isOpen, setIsOpen] = useState(false);
   const [isAdd, setIsAdd] = useState(false);
   const [categories, setCategories] = useState([
@@ -10,7 +13,7 @@ function Categories({ onTabChange }) {
     { id: 4, title: "T4", description: "Premium purchase category", ticket: 45, min: 7500, max: 10000 },
   ]);
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
-
+ 
   const [selectedItem, setSelectedItem] = useState({
     id: "",
     title: "",
@@ -19,7 +22,7 @@ function Categories({ onTabChange }) {
     min: "",
     max: "",
   });
-
+ 
   // Toast notification function
   const showToast = (message, type = "success") => {
     setToast({ show: true, message, type });
@@ -27,24 +30,24 @@ function Categories({ onTabChange }) {
       setToast({ show: false, message: "", type: "" });
     }, 3000);
   };
-
+ 
   const breadcrumb = {
     fontSize: "14px",
     marginBottom: "8px",
   };
-
+ 
   const titleStyle = {
     fontSize: "24px",
     fontWeight: "700",
     marginBottom: "20px",
   };
-
+ 
   const tabContainer = {
     display: "flex",
     gap: "20px",
     marginBottom: "20px",
   };
-
+ 
   const tabActive = {
     padding: "10px 18px",
     borderRadius: "6px",
@@ -54,7 +57,7 @@ function Categories({ onTabChange }) {
     color: "#fff",
     border: "1px solid #B11226",
   };
-
+ 
   const tabInactive = {
     padding: "10px 18px",
     borderRadius: "6px",
@@ -64,7 +67,7 @@ function Categories({ onTabChange }) {
     color: "#000",
     border: "1px solid #ccc",
   };
-
+ 
   const addBtn = {
     background: "#B11226",
     color: "white",
@@ -74,30 +77,30 @@ function Categories({ onTabChange }) {
     border: "none",
     fontWeight: "600",
   };
-
+ 
   const tableHead = {
     background: "#B11226",
     color: "#fff",
   };
-
+ 
   const tableStyle = {
     width: "100%",
     borderCollapse: "collapse",
     marginTop: "20px",
   };
-
+ 
   const tdStyle = {
     padding: "12px",
     borderBottom: "1px solid #ddd",
   };
-
+ 
   const thStyle = {
     padding: "12px",
     borderBottom: "1px solid #ddd",
     textAlign: "left",
     fontWeight: "600",
   };
-
+ 
   const editIcon = {
     background: "#FFC107",
     padding: "6px",
@@ -110,13 +113,13 @@ function Categories({ onTabChange }) {
     alignItems: "center",
     justifyContent: "center",
   };
-
+ 
   const openEdit = (item) => {
     setSelectedItem(item);
     setIsAdd(false);
     setIsOpen(true);
   };
-
+ 
   const openAdd = () => {
     setSelectedItem({
       id: "",
@@ -129,13 +132,13 @@ function Categories({ onTabChange }) {
     setIsAdd(true);
     setIsOpen(true);
   };
-
+ 
   const handleSave = () => {
     if (!selectedItem.title || !selectedItem.description || !selectedItem.ticket || !selectedItem.min || !selectedItem.max) {
       showToast("Please fill all required fields!", "error");
       return;
     }
-
+ 
     const newCategory = {
       id: categories.length + 1,
       title: selectedItem.title,
@@ -144,28 +147,28 @@ function Categories({ onTabChange }) {
       min: parseInt(selectedItem.min),
       max: parseInt(selectedItem.max),
     };
-
+ 
     setCategories(prevCategories => [...prevCategories, newCategory]);
     setIsOpen(false);
     showToast("Category added successfully!");
   };
-
+ 
   const handleUpdate = () => {
     if (!selectedItem.title || !selectedItem.description || !selectedItem.ticket || !selectedItem.min || !selectedItem.max) {
       showToast("Please fill all required fields!", "error");
       return;
     }
-
-    setCategories(prevCategories => 
-      prevCategories.map(item => 
-        item.id === selectedItem.id 
-          ? { 
-              ...item, 
+ 
+    setCategories(prevCategories =>
+      prevCategories.map(item =>
+        item.id === selectedItem.id
+          ? {
+              ...item,
               title: selectedItem.title,
               description: selectedItem.description,
               ticket: parseInt(selectedItem.ticket),
               min: parseInt(selectedItem.min),
-              max: parseInt(selectedItem.max)
+              max: parseInt(selectedItem.max),
             }
           : item
       )
@@ -173,7 +176,7 @@ function Categories({ onTabChange }) {
     setIsOpen(false);
     showToast("Category updated successfully!");
   };
-
+ 
   const handleSubmit = () => {
     if (isAdd) {
       handleSave();
@@ -181,7 +184,7 @@ function Categories({ onTabChange }) {
       handleUpdate();
     }
   };
-
+ 
   return (
     <div style={{ padding: "20px", width: "100%" }}>
       {/* Toast Notification */}
@@ -210,27 +213,27 @@ function Categories({ onTabChange }) {
           {toast.message}
         </div>
       )}
-
+ 
       {/* ✅ Breadcrumb */}
       <p style={breadcrumb}>
         <b>Home</b> | Earn Cashback Management
       </p>
-
+ 
       {/* ✅ Heading */}
       <h2 style={titleStyle}>Earn Cashback Management</h2>
-
+ 
       {/* ✅ Tabs */}
       <div style={tabContainer}>
         <button style={tabActive}>Categories</button>
-
+ 
         <button
           style={tabInactive}
-          onClick={() => onTabChange("earn cashbacks")}
+          onClick={() => navigate("/earn-cashbacks")} // ✅ Navigation added here
         >
           Earn Cashbacks
         </button>
       </div>
-
+ 
       {/* ✅ Title + Add button */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
         <h3 style={{ color: "#F4A30A", margin: 0 }}>Cashback Categories</h3>
@@ -238,7 +241,7 @@ function Categories({ onTabChange }) {
           + Add Category
         </button>
       </div>
-
+ 
       {/* ✅ Table */}
       <table style={tableStyle}>
         <thead style={tableHead}>
@@ -252,7 +255,7 @@ function Categories({ onTabChange }) {
             <th style={thStyle}>Actions</th>
           </tr>
         </thead>
-
+ 
         <tbody>
           {categories.map((item) => (
             <tr key={item.id}>
@@ -271,7 +274,7 @@ function Categories({ onTabChange }) {
           ))}
         </tbody>
       </table>
-
+ 
       {/* ✅ MODAL */}
       {isOpen && (
         <div
@@ -304,14 +307,12 @@ function Categories({ onTabChange }) {
             >
               {isAdd ? "Add Category" : "Edit Category"}
             </div>
-
+ 
             <div style={{ marginBottom: "10px" }}>
               <label style={{ display: "block", marginBottom: "5px", fontWeight: "500" }}>Title *</label>
               <input
                 value={selectedItem.title}
-                onChange={(e) =>
-                  setSelectedItem({ ...selectedItem, title: e.target.value })
-                }
+                onChange={(e) => setSelectedItem({ ...selectedItem, title: e.target.value })}
                 style={{
                   width: "100%",
                   padding: "8px",
@@ -321,14 +322,12 @@ function Categories({ onTabChange }) {
                 placeholder="Enter category title"
               />
             </div>
-
+ 
             <div style={{ marginBottom: "10px" }}>
               <label style={{ display: "block", marginBottom: "5px", fontWeight: "500" }}>Description *</label>
               <textarea
                 value={selectedItem.description}
-                onChange={(e) =>
-                  setSelectedItem({ ...selectedItem, description: e.target.value })
-                }
+                onChange={(e) => setSelectedItem({ ...selectedItem, description: e.target.value })}
                 rows={3}
                 style={{
                   width: "100%",
@@ -340,15 +339,13 @@ function Categories({ onTabChange }) {
                 placeholder="Enter category description"
               />
             </div>
-
+ 
             <div style={{ marginBottom: "10px" }}>
               <label style={{ display: "block", marginBottom: "5px", fontWeight: "500" }}>Ticket Price *</label>
               <input
                 type="number"
                 value={selectedItem.ticket}
-                onChange={(e) =>
-                  setSelectedItem({ ...selectedItem, ticket: e.target.value })
-                }
+                onChange={(e) => setSelectedItem({ ...selectedItem, ticket: e.target.value })}
                 style={{
                   width: "100%",
                   padding: "8px",
@@ -358,16 +355,14 @@ function Categories({ onTabChange }) {
                 placeholder="Enter ticket price"
               />
             </div>
-
+ 
             <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
               <div style={{ flex: 1 }}>
                 <label style={{ display: "block", marginBottom: "5px", fontWeight: "500" }}>Bill Range Min *</label>
                 <input
                   type="number"
                   value={selectedItem.min}
-                  onChange={(e) =>
-                    setSelectedItem({ ...selectedItem, min: e.target.value })
-                  }
+                  onChange={(e) => setSelectedItem({ ...selectedItem, min: e.target.value })}
                   style={{
                     width: "100%",
                     padding: "8px",
@@ -377,15 +372,13 @@ function Categories({ onTabChange }) {
                   placeholder="Min amount"
                 />
               </div>
-
+ 
               <div style={{ flex: 1 }}>
                 <label style={{ display: "block", marginBottom: "5px", fontWeight: "500" }}>Bill Range Max *</label>
                 <input
                   type="number"
                   value={selectedItem.max}
-                  onChange={(e) =>
-                    setSelectedItem({ ...selectedItem, max: e.target.value })
-                  }
+                  onChange={(e) => setSelectedItem({ ...selectedItem, max: e.target.value })}
                   style={{
                     width: "100%",
                     padding: "8px",
@@ -396,11 +389,9 @@ function Categories({ onTabChange }) {
                 />
               </div>
             </div>
-
+ 
             {/* ✅ Buttons */}
-            <div
-              style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}
-            >
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
               <button
                 onClick={() => setIsOpen(false)}
                 style={{
@@ -415,7 +406,7 @@ function Categories({ onTabChange }) {
               >
                 Cancel
               </button>
-
+ 
               <button
                 onClick={handleSubmit}
                 style={{
@@ -437,5 +428,6 @@ function Categories({ onTabChange }) {
     </div>
   );
 }
-
+ 
 export default Categories;
+ 

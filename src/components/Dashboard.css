@@ -1,0 +1,218 @@
+/* Center all icons properly */
+.stat-card svg,
+.summary-card svg {
+  display: block;
+  margin: 0 auto;              /* centers horizontally */
+  text-align: center;
+  align-self: center;
+}
+
+/* Optional: fine-tune spacing (same look, better alignment) */
+.stat-card .mb-2,
+.summary-card .mb-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* ===== ICON CENTERING ===== */
+.stat-card svg,
+.summary-card svg {
+  display: block;
+  margin: 0 auto; /* centers horizontally */
+  text-align: center;
+}
+
+/* Keeps spacing consistent for icons */
+.stat-card .mb-2,
+.summary-card .mb-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== CHART CENTERING (FIXED VERSION) ===== */
+.chart-card {
+  text-align: center;
+}
+
+/* Centers only the chart canvas without shrinking it */
+.chart-card > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;              /* keeps original chart height */
+}
+
+.chart-card canvas {
+  margin: 0 auto;
+  max-width: 95%;
+  height: auto !important;   /* prevent shrinking */
+}
+
+/* Center headings */
+.chart-card h6 {
+  text-align: center;
+  width: 100%;
+}
+/* ========= DASHBOARD BASE ========= */
+.dashboard-wrapper {
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ========= ICON CENTERING ========= */
+.stat-card svg,
+.summary-card svg {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.stat-card .mb-2,
+.summary-card .mb-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ========= CHART CENTERING & CONTAINMENT ========= */
+.chart-card {
+  text-align: center;
+  overflow: hidden;              /* ✅ keeps chart inside card */
+}
+
+.chart-card > div {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  text-align: center;
+  overflow: hidden;              /* ✅ prevents chart overflow */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.chart-card canvas {
+  display: block;
+  margin: 0 auto;
+  width: 100% !important;
+  height: 220px !important;      /* ✅ uniform chart height */
+  max-width: 100%;
+  object-fit: contain;           /* ✅ keeps inside boundary */
+}
+
+/* ========= CARD STYLING ========= */
+.stat-card,
+.chart-card,
+.summary-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  padding: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.stat-card:hover,
+.chart-card:hover,
+.summary-card:hover {
+  transform: translateY(-3px);
+}
+
+/* ========= HEADINGS ========= */
+.dashboard-wrapper h1 {
+  font-weight: bold;
+  text-align: center;
+  color: #991925;
+}
+
+h4.fw-bold.text-secondary {
+  color: #991925 !important;
+  font-weight: 600;
+}
+
+/* ========= RESPONSIVENESS ========= */
+
+/* Large tablets / small laptops */
+@media (max-width: 992px) {
+  .dashboard-wrapper {
+    padding: 15px;
+  }
+
+  .stat-card,
+  .chart-card,
+  .summary-card {
+    margin-bottom: 15px;
+  }
+
+  h4.fw-bold.text-secondary {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  h6 {
+    font-size: 0.95rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  .chart-card canvas {
+    height: 200px !important;    /* slightly smaller for tablet */
+  }
+}
+
+/* Tablets and small screens */
+@media (max-width: 768px) {
+  .dashboard-wrapper h1 {
+    font-size: 1.6rem;
+  }
+
+  .stat-card svg,
+  .summary-card svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .chart-card {
+    padding: 10px;
+  }
+
+  .chart-card canvas {
+    max-width: 100%;
+    height: 180px !important;
+  }
+}
+
+/* Phones */
+@media (max-width: 576px) {
+  .dashboard-wrapper {
+    padding: 10px;
+  }
+
+  .stat-card h6,
+  .summary-card h6 {
+    font-size: 0.85rem;
+  }
+
+  .stat-card h3,
+  .summary-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .chart-card h6 {
+    font-size: 0.9rem;
+  }
+
+  .dashboard-wrapper h1 {
+    font-size: 1.4rem;
+  }
+
+  .chart-card {
+    margin-bottom: 20px;
+  }
+
+  .chart-card canvas {
+    height: 160px !important;
+  }
+}

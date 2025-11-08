@@ -239,7 +239,7 @@ const NavbarTop = ({ onLogout, toggleSidebar }) => {
     <nav
       className="navbar px-3 px-md-4 d-flex align-items-center shadow-sm"
       style={{
-        minHeight: "70px",
+        minHeight: "75px",
         width: "100%",
         position: "fixed",
         top: 0,
@@ -281,7 +281,7 @@ const NavbarTop = ({ onLogout, toggleSidebar }) => {
           style={{ fontSize: "1rem", whiteSpace: "nowrap" }}
         >
           <small>Welcome,</small>{" "}
-          <span style={{ fontWeight: "800", color: "orange" }}>Admin</span>
+          <span style={{ fontWeight: "00", color: "White" }}>Admin</span>
         </span>
 
         {/* Mobile Welcome (smaller) */}
@@ -289,7 +289,7 @@ const NavbarTop = ({ onLogout, toggleSidebar }) => {
           className="fw-bold text-white d-inline d-sm-none"
           style={{ fontSize: "0.85rem", whiteSpace: "nowrap" }}
         >
-          Hi, <span style={{ color: "orange" }}>Admin</span>
+          Hi, <span style={{ color: "white" }}>Admin</span>
         </span>
 
         {/* Profile Button */}
@@ -328,7 +328,7 @@ const NavbarTop = ({ onLogout, toggleSidebar }) => {
             }}
           >
             <Card.Body className="text-center py-3">
-              <FaUserCog className="mb-2" style={{ color: "orange" }} size={32} />
+              <FaUserCog className="mb-2" style={{ color: "white" }} size={32} />
               <h6 className="fw-bold mb-1">Admin User</h6>
               <p className="text-muted small mb-2">admin@example.com</p>
               <Button
