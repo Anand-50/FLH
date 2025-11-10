@@ -354,6 +354,7 @@ const Sidebar = ({ sidebarOpen = true, onSelect }) => {
         {/* Remaining Main Items */}
         {[
           { label: "Subscriptions", icon: FaCoins, path: "/subscriptions" },
+          { label: "Configuration", icon: FaCoins, path: "/configuration" },
           { label: "Schemes", icon: FaCoins, path: "/schemes" },
           { label: "Earn Cashbacks", icon: FaMoneyBillAlt, path: "/earn-cashbacks" },
           { label: "Lucky Draws", icon: FaGift, path: "/lucky-draws" },

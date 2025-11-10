@@ -960,59 +960,97 @@ export default function VendorPage() {
         </div>
       )}
 
-      {/* CSS Styles - Matching Customer Page */}
-      <style jsx>{`
-        /* Custom table header with maroon background */
-        .custom-thead {
-          background-color: #b61d23 !important;
-          color: white !important;
-        }
-       
-        .custom-thead th {
-          background-color: #b61d23 !important;
-          color: white !important;
-          border: none !important;
-          padding: 12px 15px !important;
-          font-weight: 600;
-          font-size: 15px;
-        }
+     {/* CSS Styles - Updated for visibility and colors */}
+<style jsx>{`
+  /* Table header */
+  .custom-thead {
+    background-color: #b61d23 !important; /* maroon header */
+    color: white !important;
+  }
 
-        /* Enhanced striped table design */
-        .table-striped tbody tr:nth-of-type(odd) {
-          background-color: rgba(0, 0, 0, 0.02) !important;
-        }
+  .custom-thead th {
+    padding: 12px 15px !important;
+    font-weight: 600;
+    font-size: 15px;
+    border: none !important;
+  }
 
-        .table-striped tbody tr:nth-of-type(even) {
-          background-color: rgba(0, 0, 0, 0.05) !important;
-        }
+  /* Table stripes with soft colors */
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fff8f8 !important; /* light maroon shade */
+  }
+  .table-striped tbody tr:nth-of-type(even) {
+    background-color: #fff3f3 !important; /* slightly lighter */
+  }
 
-        .table tbody tr:hover {
-          background-color: #e8f4f8 !important;
-          transition: background-color 0.2s ease-in-out;
-        }
+  .table tbody tr:hover {
+    background-color: #ffe0b2 !important; /* mustard hover */
+    transition: background-color 0.2s ease-in-out;
+  }
 
-        .table th,
-        .table td {
-          border: none !important;
-          vertical-align: middle !important;
-          padding: 12px 15px !important;
-        }
+  .table th,
+  .table td {
+    border: none !important;
+    vertical-align: middle !important;
+    padding: 12px 15px !important;
+    color: #000 !important; /* black text */
+  }
 
-        .table thead th {
-          border: none !important;
-          text-align: left;
-        }
+  /* Card styles */
+  .card {
+    background-color: #fff3f3 !important; /* light maroon background */
+    color: #000 !important;
+  }
 
-        /* Ensure table header styles override Bootstrap */
-        .custom-table thead tr {
-          background-color: #b61d23 !important;
-        }
-       
-        .custom-table thead th {
-          background-color: #b61d23 !important;
-          color: white !important;
-        }
-      `}</style>
-    </div>
+  .card h4, .card h5 {
+    color: #b61d23 !important; /* headings maroon */
+    font-weight: 600;
+  }
+
+  .badge {
+    font-weight: 500;
+    font-size: 0.85rem;
+  }
+
+  .btn-warning {
+    background-color: #ffc107 !important; /* mustard */
+    color: #000 !important;
+    border: none !important;
+  }
+
+  .btn-primary {
+    background-color: #b61d23 !important; /* maroon */
+    color: #fff !important;
+    border: none !important;
+  }
+
+  .btn-danger {
+    background-color: #d32f2f !important; /* red */
+    color: #fff !important;
+    border: none !important;
+  }
+
+  .btn-success {
+    background-color: #4caf50 !important; /* green */
+    color: #fff !important;
+    border: none !important;
+  }
+
+  /* Modal headers */
+  .modal-title {
+    color: #b61d23 !important;
+    font-weight: 700;
+  }
+
+  /* Search bar button */
+  form button {
+    background-color: #b61d23 !important; /* maroon search button */
+  }
+
+  form input {
+    color: #000 !important; /* black text in search input */
+  }
+`}</style>
+   </div>
   );
 }

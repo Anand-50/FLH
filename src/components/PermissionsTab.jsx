@@ -437,7 +437,7 @@ const PermissionsTab = () => {
           onClick={() => setShowForm(true)}
           className="btn-create-permission"
         >
-          <FaPlus className="me-1" /> Create New Admin
+          <FaPlus className="me-1" /> Assign Permissions
         </button>
       </div>
 

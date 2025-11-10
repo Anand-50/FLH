@@ -528,78 +528,74 @@ const Customers = () => {
       </Modal>
 
       {/* CSS Styles - FIXED to ensure maroon header works */}
-      <style jsx>{`
-        /* Custom table header with maroon background */
-        .custom-thead {
-          background-color: #b61d23 !important; /* Maroon color */
-          color: white !important;
-        }
-        
-        .custom-thead th {
-          background-color: #b61d23 !important;
-          color: white !important;
-          border: none !important;
-          padding: 12px 15px !important;
-          font-weight: 600;
-          font-size: 15px;
-        }
+      {/* 🔹 Updated CSS Styles */}
+<style jsx>{`
+  /* Card Titles & Headings */
+  .card-title,
+  h5,
+  strong {
+    color: #b61d23 !important; /* Maroon */
+  }
 
-        /* Enhanced striped table design */
-        .table-striped tbody tr:nth-of-type(odd) {
-          background-color: rgba(0, 0, 0, 0.02) !important;
-        }
+  /* Card text */
+  .card-body,
+  .card-body p,
+  .card-body div,
+  .card-body span {
+    color: #000 !important; /* Black text */
+  }
 
-        .table-striped tbody tr:nth-of-type(even) {
-          background-color: rgba(0, 0, 0, 0.05) !important;
-        }
+  /* Badge colors */
+  .badge.bg-success {
+    background-color: #28a745 !important;
+    color: white !important;
+  }
+  .badge.bg-danger {
+    background-color: #dc3545 !important;
+    color: white !important;
+  }
+  .badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: black !important;
+  }
 
-        .table tbody tr:hover {
-          background-color: #fff5f5 !important;
-          transition: background-color 0.2s ease-in-out;
-        }
+  /* Table text */
+  table.table tbody td {
+    color: #000 !important;
+  }
 
-        .table th,
-        .table td {
-          border: none !important;
-          vertical-align: middle !important;
-          padding: 12px 15px !important;
-        }
+  /* Table header */
+  .custom-thead th {
+    background-color: #b61d23 !important;
+    color: white !important;
+  }
 
-        .table thead th {
-          border: none !important;
-          text-align: left;
-        }
+  /* Hover row */
+  .table tbody tr:hover {
+    background-color: #fff5f5 !important;
+    transition: background-color 0.2s ease-in-out;
+  }
 
-        /* Ensure table header styles override Bootstrap */
-        .custom-table thead tr {
-          background-color: #b61d23 !important;
-        }
-        
-        .custom-table thead th {
-          background-color: #b61d23 !important;
-          color: white !important;
-        }
-      `}</style>
+  /* Buttons */
+  .btn-warning {
+    background-color: #ffc107 !important;
+    color: black !important;
+    border: none;
+  }
+  .btn-warning:hover {
+    background-color: #e0a800 !important;
+    color: black !important;
+  }
+  .btn-danger {
+    background-color: #dc3545 !important;
+    color: white !important;
+  }
+  .btn-success {
+    background-color: #28a745 !important;
+    color: white !important;
+  }
+`}</style>
 
-      {/* Additional inline style as backup */}
-      <style>{`
-        .custom-thead,
-        .custom-table thead,
-        .custom-table thead th {
-          background-color: #b61d23 !important;
-          color: white !important;
-          border-color: #b61d23 !important;
-        }
-        
-        table.table thead tr {
-          background-color: #b61d23 !important;
-        }
-        
-        table.table thead th {
-          background-color: #b61d23 !important;
-          color: white !important;
-        }
-      `}</style>
     </div>
   );
 };

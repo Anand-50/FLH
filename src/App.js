@@ -386,7 +386,6 @@ import Login from "./components/Login";
 import Sidebar from "./components/Sidebar";
 import NavbarTop from "./components/NavbarTop";
 import Dashboard from "./components/Dashboard";
-import ConfigurationPage from "./components/ConfigurationPage";
 import Schemes from "./components/Schemes";
 import EarnCashbacks from "./components/EarnCashbacks";
 import Categories from "./components/Categories";
@@ -402,6 +401,7 @@ import ProductCategories from "./components/ProductCategories";
 import Orders from "./components/Orders";
 import OrderDetails from "./components/OrderDetails";
 import Subscriptions from "./components/Subscriptions";
+import Configuration from "./components/Configuration";
 import Customers from "./components/Customers";
 import Agents from "./components/Agents";
 import Vendors from "./components/Vendors";
@@ -498,11 +498,11 @@ function App() {
             {/* Dashboard */}
             <Route path="/dashboard" element={<Dashboard />} />
 
-            {/* Configuration */}
-            <Route path="/configuration" element={<ConfigurationPage />} />
+           
 
             {/* Other main pages */}
             <Route path="/subscriptions" element={<Subscriptions />} />
+            <Route path="/configuration" element={<Configuration />} />
             <Route path="/schemes" element={<Schemes />} />
             <Route path="/earn-cashbacks" element={<EarnCashbacks />} />
             <Route path="/categories" element={<Categories />} />
